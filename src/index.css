@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #1b1a17;
+  background-color: #1b1a18;
   color: #fff;
 }
 
@@ -15,24 +15,30 @@ code {
 }
 
 .music-content {
-  margin: 100px auto;
+  margin: 75px auto;
+}
+
+.music-content h2 {
+  font-size: 30px;
+}
+
+.music-content h3 {
+  font-size:15px;
+  font-style:italic;
+  color:gray;
 }
 
 .music-content img {
   border-radius: 20px;
 }
 
-.song-title {
-  font-size: 23px;
-}
-
-.song-artist {
+.music-content p {
   font-size: 18px;
   font-weight: normal;
 }
 
 .btn-select {
-  background-color: #711a75;
+  background-color: #9c16a3;
   color: #fff;
   padding: 12px 20px;
   margin: 8px 0px;
