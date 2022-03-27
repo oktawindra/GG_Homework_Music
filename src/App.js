@@ -5,7 +5,11 @@ import data from './Data';
 function App() {
   return (
     <div className="App">
-      <Track data={data} />
+    {
+      data.map((item) => (
+        <Track item={item} />
+      ))
+    }
     </div>
   );
 }

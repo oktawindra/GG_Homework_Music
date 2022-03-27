@@ -1,19 +1,19 @@
 import Button from "../UI/Button";
 import Image from "../UI/Image";
 
-const Track = ({ data }) => {
+const Track = ({ item }) => {
   return (
     <div className="App">
       <div className='music-content'>
         <Image
-        title={data.name}
-        imgUrl={data.album.images[0].url}
-        width="150px"
-        height="150px"
+        title={item.name}
+        imgUrl={item.album.images[0].url}
+        width="275px"
+        height="275px"
         />
-        <h2>{data.name}</h2>
-        <h3>{data.album.name}</h3>
-        <p>{data.artists[0].name}</p>
+        <h2>{item.name}</h2>
+        <h3>{item.album.name}</h3>
+        <p>{item.artists[0].name}</p>
         <div>
           <Button text="Select" />
         </div>
