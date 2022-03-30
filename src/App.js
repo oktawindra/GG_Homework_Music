@@ -1,5 +1,7 @@
 import './App.css';
 import Track from "./components/Track";
+import Login from "./components/Login";
+import Search from "./components/Search";
 import data from './Data';
 
 function App() {
@@ -10,6 +12,8 @@ function App() {
         <Track item={item} />
       ))
     }
+    <br/>
+    <Search />
     </div>
   );
 }

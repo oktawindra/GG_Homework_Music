@@ -14,8 +14,31 @@ code {
     monospace;
 }
 
+.login-content button, .btn-select, .search-form button {
+  color: rgb(8, 1, 1);
+  padding: 12px 20px;
+  margin: 8px 0px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.login-content button {
+  background-color: #fc0d15;
+}
+
+.login-content button:hover {
+  background-color: #ff7606;
+}
+
 .music-content {
   margin: 75px auto;
+}
+
+.music-content img {
+  border-radius: 20px;
 }
 
 .music-content h2 {
@@ -28,8 +51,9 @@ code {
   color:gray;
 }
 
-.music-content img {
-  border-radius: 20px;
+.music-content h4 {
+  font-family: 'Courier New', Courier, monospace;
+  color: darkgrey;
 }
 
 .music-content p {
@@ -37,18 +61,27 @@ code {
   font-weight: normal;
 }
 
+.search-form input {
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #30e00d;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.search-form button {
+  border-radius: 0px 10px 10px 0px;
+  background-color: #30e00d;
+}
+
+.search-content h2 {
+  font-style: italic;
+  font-size:20px;
+}
+
 .btn-select {
-  background-color: #9c16a3;
-  color: #fff;
-  padding: 12px 20px;
-  margin: 8px 0px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-weight: bold;
+  background-color: #fcf80d;
 }
 
 .btn-select:hover {
-  background-color: #4e1252;
+  background-color: #07cdff;
 }
