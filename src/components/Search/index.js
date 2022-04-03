@@ -1,99 +1,116 @@
-import { Component } from "react";
+import { Component, useEffect, useState } from "react";
 import Track from "../Track";
 import Login from "../Login";
+import Recent from "../RecentSearch";
 const axios = require('axios').default;
 
-// axios.<method> will now provide autocomplete and parameter typings
 
 
-class Search extends Component{
-    state ={
-        login: false,
-        keyword:"",
-        tracks: [],
-        token: ""
+const Search = () => {
+    const [login, setLogin] = useState(false);
+    const [keyword, setKeyword] = useState("");
+    const [tracks, setTracks] = useState([]);
+    const [token, setToken] = useState([]);
+    const [recent, setRecent] = useState([]);
+    const [selectedlist, setSelectedList] = useState([]);
+
+
+    const handleInput = (e) => {
+        setKeyword(e.target.value);
     }
 
-    handleInput = (e)=>{
-        this.setState({keyword: e.target.value})
-    }
-
-    handleSubmit = async()=>{
-        try{
+    const handleSubmit = async () => {
+        try {
             const response = await axios.get("https://api.spotify.com/v1/search", {
                 params: {
                     type: 'track',
-                    q: this.state.keyword,
+                    q: keyword,
                     limit: 5
                 },
                 headers: {
-                    Authorization: `Bearer ${this.state.token}`
+                    Authorization: `Bearer ${token}`
                 }
 
             })
-            this.setState({
-                tracks: response.data.tracks.items
-            })
-            window.scrollTo({ top: 5250, behavior: 'smooth' });
+            setRecent(tracks);
+            setTracks(response.data.tracks.items);
         }
-        catch(e){
-            alert("Tidak dapat mengautentikasi. Silahkan login terlebih dahulu.")
+        catch (e) {
+            alert(`Kamu belum login ${e}`)
             console.error(e)
         }
 
     }
 
-    componentDidMount(){
-        const url = localStorage.getItem("access_token");
-        if( url !== null){
-            this.setState({
-                token: localStorage.getItem("access_token"),
-                login: true
-            })
-        }
-        else{
-            this.setState({
-                token: "",
-                login: false
-            })
-        }
-    }
-
-    handleKeyPress = e => {
+    const handleKeyPress = e => {
         if (e.key === "Enter") {
-            this.handleSubmit();
+            handleSubmit();
         }
     };
 
-    render(){
-        return(
-            <div class="search-content">
-            <h1>Want to search for another songs? Find them here</h1>
+    useEffect(() => {
+        const url = localStorage.getItem("access_token");
+        if (url !== null) {
+            setToken(localStorage.getItem("access_token"));
+            setLogin(true);
+        }
+        else {
+            setLogin(false)
+        }
+    }, [])
+    return (
+        <div class="search-content">
+        <h1>Want to search for some songs? Find them here</h1>
+            {(login)?
+            <></>
+            :
+            <h5>Tekan tombol Login agar dapat melakukan pencarian</h5>
+            }
+            <Login />
+            {(login) ? (
+                <>
+                    <div class="search-form">
+                        <input type="text" onChange={handleInput} onKeyPress={handleKeyPress}/>
+                        <button onClick={handleSubmit}>Cari</button>
+                    </div>
+                    <h1>Hasil pencarian : {keyword}</h1>
+                    <div className="Album-container">
 
-            <Login/>
-            <br/>
-            <div class="search-form">
-                <input type="text" onChange={this.handleInput} onKeyPress={this.handleKeyPress}/>
-                <button onClick={this.handleSubmit}>Cari</button>
-            </div>
-            <h3>Hasil pencarian : {this.state.keyword}</h3>
-            <br/>
-
-            {
-                (this.state.login)?
-                this.state.tracks.map((item) => (
-                    <Track
-                    item={item}
-                    />
-                    
-                    ))
+                        {
+                            tracks.map((item) => (
+                                <Track
+                                    key={item.uri}
+                                    albumName={item.album.name}
+                                    songName={item.name}
+                                    uri={item.uri}
+                                    url={item.album.images[0].url}
+                                    artistName={item.artists[0].name}
+                                    setSelectedList={setSelectedList}
+                                    selectedlist={selectedlist}
+                                />
+                            ))
+                        }
+                    </div>
+                    <h1>Riwayat Pencarian Sebelumnya</h1>
+                    <div className="Album-container">
+                        {recent.map((item) => (
+                            <Recent
+                                key={item.id}
+                                img={item.album.images[2].url}
+                                title={item.name}
+                                artist={item.artists[0].name}
+                            />
+                            )
+                        )
+                        }
+                    </div>
+                </>
+            )
                 :
-                <h2>Status: belum login</h2>
-                    
-           }
-            </div>
-        )
-    }
+            <h2>Status: belum login</h2>
+            }
+        </div>
+    )
 }
 
 export default Search;
