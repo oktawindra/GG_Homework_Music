@@ -2,8 +2,9 @@ import { Component, useEffect, useState } from "react";
 import Track from "../Track";
 import Login from "../Login";
 import Recent from "../RecentSearch";
+import Play from '../Playlist/play.js'
+import { getUserProfile } from '../../Data/Profile.js'
 const axios = require('axios').default;
-
 
 
 const Search = () => {
@@ -13,6 +14,7 @@ const Search = () => {
     const [token, setToken] = useState([]);
     const [recent, setRecent] = useState([]);
     const [selectedlist, setSelectedList] = useState([]);
+    const [user, setUser] = useState({});
 
 
     const handleInput = (e) => {
@@ -49,17 +51,26 @@ const Search = () => {
     };
 
     useEffect(() => {
-        const url = localStorage.getItem("access_token");
-        if (url !== null) {
-            setToken(localStorage.getItem("access_token"));
-            setLogin(true);
+        const accessTokenParams = new URLSearchParams(window.location.hash).get('#access_token');
+        
+        if (accessTokenParams !== null) {
+            setToken(accessTokenParams);
+            setLogin(accessTokenParams !== null);
+    
+            const setUserProfile = async () => {
+            try {
+                const response = await getUserProfile(accessTokenParams);
+    
+                setUser(response);
+            } catch (e) {
+            }
+            }
+        setUserProfile();
         }
-        else {
-            setLogin(false)
-        }
-    }, [])
+    }, []);
+
     return (
-        <div class="search-content">
+        <div className="search-content">
         <h1>Want to search for some songs? Find them here</h1>
             {(login)?
             <></>
@@ -69,7 +80,12 @@ const Search = () => {
             <Login />
             {(login) ? (
                 <>
-                    <div class="search-form">
+                <Play
+                    accessToken={token}
+                    userId={user.id}
+                    uriTracks={selectedlist}
+                />
+                    <div className="search-form">
                         <input type="text" onChange={handleInput} onKeyPress={handleKeyPress}/>
                         <button onClick={handleSubmit}>Cari</button>
                     </div>
@@ -91,6 +107,8 @@ const Search = () => {
                             ))
                         }
                     </div>
+                    <hr></hr>
+                    <br></br>
                     <h1>Riwayat Pencarian Sebelumnya</h1>
                     <div className="Album-container">
                         {recent.map((item) => (
@@ -104,6 +122,7 @@ const Search = () => {
                         )
                         }
                     </div>
+                    <br></br>
                 </>
             )
                 :

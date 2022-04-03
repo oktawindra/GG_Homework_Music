@@ -34,7 +34,7 @@ const Login = ()=>{
         }, []
     )
     return(
-        <div class="login-content">
+        <div className="login-content">
         {
             (!login)?
             <button onClick={handleLogin} >Login with Spotify Auth API</button>

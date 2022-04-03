@@ -14,7 +14,7 @@ code {
     monospace;
 }
 
-.login-content button, .btn-select, .search-form button {
+.login-content button, .btn-select, .search-form button, .playlist-button button {
   color: rgb(8, 1, 1);
   padding: 12px 20px;
   margin: 8px 0px;
@@ -84,4 +84,38 @@ code {
 
 .btn-select:hover {
   background-color: #07cdff;
+}
+
+.playlist {
+  border: 1px solid white;
+  border-radius: 25px;
+  padding:15px;
+  width:30%;
+  min-width: 275px;
+  margin: 25px auto 25px auto;
+}
+
+.playlist-form input, .playlist-form textarea {
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid rgb(41, 41, 255);
+  border-radius: 10px;
+  width: 190px;
+}
+
+.playlist-button button {
+  background-color: rgb(41, 41, 255);
+  margin-bottom:15px;
+}
+
+.playlist-form label {
+  display: inline-block;
+  width: 100px;
+  vertical-align: top;
+  text-align: left;
+  margin:10px 0;
+}
+
+.input-group__error {
+  color:rgb(252, 69, 69);
 }
