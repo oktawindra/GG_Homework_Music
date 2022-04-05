@@ -1,4 +1,6 @@
-import { Component, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { dataAccessToken } from '../../Data/Action.js';
 import Track from "../Track";
 import Login from "../Login";
 import Recent from "../RecentSearch";
@@ -7,14 +9,15 @@ import { getUserProfile } from '../../Data/Profile.js'
 const axios = require('axios').default;
 
 
-const Search = () => {
+const Search = ()=> {
+    const token = useSelector(state => state.dataAccessToken.value); 
     const [login, setLogin] = useState(false);
     const [keyword, setKeyword] = useState("");
     const [tracks, setTracks] = useState([]);
-    const [token, setToken] = useState([]);
     const [recent, setRecent] = useState([]);
     const [selectedlist, setSelectedList] = useState([]);
     const [user, setUser] = useState({});
+    const dispatch = useDispatch();
 
 
     const handleInput = (e) => {
@@ -54,7 +57,7 @@ const Search = () => {
         const accessTokenParams = new URLSearchParams(window.location.hash).get('#access_token');
         
         if (accessTokenParams !== null) {
-            setToken(accessTokenParams);
+            dispatch(dataAccessToken(accessTokenParams));
             setLogin(accessTokenParams !== null);
     
             const setUserProfile = async () => {
@@ -67,7 +70,7 @@ const Search = () => {
             }
         setUserProfile();
         }
-    }, []);
+    }, [token, dispatch]);
 
     return (
         <div className="search-content">
