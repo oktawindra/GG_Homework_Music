@@ -24,17 +24,27 @@ const Login = ()=>{
 
 
     useEffect(()=> {
-            let url = window.location.hash;
-            if(url.length > 0 ){
-                url = url.substring(1).split("&")[0].split("=")[1];
-                setLogin(true);
-            }
-            dispatch(dataAccessToken(url));
-        }, [token, dispatch]
-    )
+        let url = window.location.hash;
+        if(url.length > 0 ){
+            url = url.substring(1).split("&")[0].split("=")[1];
+        }
+        
+        if(token !== ""){
+            setLogin(true);
+        }else{
+            setLogin(false);
+        }
+        dispatch(dataAccessToken(url));
+    }, [token, dispatch])
 
     return(
         <div className="login-content">
+        {
+            (login)?
+            <></>
+            :
+            <h5>Tekan tombol Login agar dapat melakukan pencarian</h5>
+        }
         {
             (!login)?
             <button onClick={handleLogin} >Login with Spotify Auth API</button>

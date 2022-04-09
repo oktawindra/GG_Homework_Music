@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, connect } from 'react-redux';
 import { dataAccessToken } from '../../Data/Action.js';
 import Track from "../Track";
 import Login from "../Login";
@@ -9,7 +9,7 @@ import { getUserProfile } from '../../Data/Profile.js'
 const axios = require('axios').default;
 
 
-const Search = ()=> {
+const Search = ({tokencode})=> {
     const token = useSelector(state => state.dataAccessToken.value); 
     const [login, setLogin] = useState(false);
     const [keyword, setKeyword] = useState("");
@@ -54,33 +54,28 @@ const Search = ()=> {
     };
 
     useEffect(() => {
-        const accessTokenParams = new URLSearchParams(window.location.hash).get('#access_token');
-        
+        const accessTokenParams = tokencode;
+
         if (accessTokenParams !== null) {
             dispatch(dataAccessToken(accessTokenParams));
-            setLogin(accessTokenParams !== null);
     
             const setUserProfile = async () => {
             try {
                 const response = await getUserProfile(accessTokenParams);
     
                 setUser(response);
+                setLogin(true);
             } catch (e) {
+                //console.log('error');
             }
             }
         setUserProfile();
         }
-    }, [token, dispatch]);
+    }, [token, tokencode, dispatch]);
 
     return (
         <div className="search-content">
-        <h1>Want to search for some songs? Find them here</h1>
-            {(login)?
-            <></>
-            :
-            <h5>Tekan tombol Login agar dapat melakukan pencarian</h5>
-            }
-            <Login />
+        <Login />
             {(login) ? (
                 <>
                 <Play
@@ -94,38 +89,40 @@ const Search = ()=> {
                     </div>
                     <h1>Hasil pencarian : {keyword}</h1>
                     <div className="Album-container">
-
-                        {
-                            tracks.map((item) => (
-                                <Track
-                                    key={item.uri}
-                                    albumName={item.album.name}
-                                    songName={item.name}
-                                    uri={item.uri}
-                                    url={item.album.images[0].url}
-                                    artistName={item.artists[0].name}
-                                    setSelectedList={setSelectedList}
-                                    selectedlist={selectedlist}
+                        <div className="Songs-container">
+                            {
+                                tracks.map((item) => (
+                                    <Track
+                                        key={item.uri}
+                                        albumName={item.album.name}
+                                        songName={item.name}
+                                        uri={item.uri}
+                                        url={item.album.images[0].url}
+                                        artistName={item.artists[0].name}
+                                        setSelectedList={setSelectedList}
+                                        selectedlist={selectedlist}
+                                    />
+                                ))
+                            }
+                        </div>
+                    </div>
+                    <div className="Recent-search">
+                        <br></br>
+                        <h1>Riwayat Pencarian Sebelumnya</h1>
+                        <div className="Album-container-recent">
+                            {recent.map((item) => (
+                                <Recent
+                                    key={item.id}
+                                    img={item.album.images[2].url}
+                                    title={item.name}
+                                    artist={item.artists[0].name}
                                 />
-                            ))
-                        }
-                    </div>
-                    <hr></hr>
-                    <br></br>
-                    <h1>Riwayat Pencarian Sebelumnya</h1>
-                    <div className="Album-container">
-                        {recent.map((item) => (
-                            <Recent
-                                key={item.id}
-                                img={item.album.images[2].url}
-                                title={item.name}
-                                artist={item.artists[0].name}
-                            />
+                                )
                             )
-                        )
-                        }
+                            }
+                        </div>
+                        <br></br>
                     </div>
-                    <br></br>
                 </>
             )
                 :
@@ -134,5 +131,8 @@ const Search = ()=> {
         </div>
     )
 }
-
-export default Search;
+const mapStateToProps = (state) => ({
+    token: state.token,
+  });
+  
+export default connect(mapStateToProps)(Search);

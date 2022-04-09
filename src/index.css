@@ -14,31 +14,39 @@ code {
     monospace;
 }
 
-.login-content button, .btn-select, .search-form button, .playlist-button button {
-  color: rgb(8, 1, 1);
-  padding: 12px 20px;
-  margin: 8px 0px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-weight: bold;
+.Album-container {
+  display: block;
+  margin: auto;
+  width: 70%;
 }
 
-.login-content button {
-  background-color: #fc0d15;
+.Songs-container {
+  display: block;
+  box-sizing: border-box;
 }
 
-.login-content button:hover {
-  background-color: #ff7606;
+.Album-container-recent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Recent-container {
+  float: left;
+  padding: 20px;
+  width: 150px;
+  word-wrap: break-word;
 }
 
 .music-content {
-  margin: 75px auto;
+  padding: 10px;
+  float:left;
+  width: 47%
 }
 
 .music-content img {
   border-radius: 20px;
+  float:left; 
 }
 
 .music-content h2 {
@@ -61,16 +69,53 @@ code {
   font-weight: normal;
 }
 
+.music-info {
+  text-align: left;
+  float:left;
+  margin: 0px 0px 0px 20px;
+  line-height: 0.9;
+  width:50%;
+}
+
+.Recent-search {
+  clear: left;
+}
+
+.login-content button, .btn-select, .search-form button, .playlist-button button {
+  color: #fff;
+  padding: 12px 20px;
+  margin: 8px 0px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.login-content button {
+  background-color: #f80c0c;
+}
+
+.login-content button:hover {
+  background-color: #045a3d;
+}
+
+.search-form input:hover{
+  border: 2px solid chartreuse;
+}
 .search-form input {
   padding: 10px;
   margin: 10px 0;
-  border: 2px solid #30e00d;
+  border: 2px solid #9c16a3;
   border-radius: 10px 0px 0px 10px;
 }
 
+.search-form button:hover{
+  background-color: chartreuse;
+}
 .search-form button {
   border-radius: 0px 10px 10px 0px;
-  background-color: #30e00d;
+  background-color: #f11efc;
 }
 
 .search-content h2 {
@@ -79,11 +124,12 @@ code {
 }
 
 .btn-select {
-  background-color: #fcf80d;
+  background-color: chartreuse;
+  color: #000;
 }
 
 .btn-select:hover {
-  background-color: #07cdff;
+  background-color: cyan;
 }
 
 .playlist {
@@ -98,13 +144,17 @@ code {
 .playlist-form input, .playlist-form textarea {
   padding: 10px;
   margin: 10px 0;
-  border: 2px solid rgb(41, 41, 255);
+  border: 2px solid rgb(66, 255, 41);
   border-radius: 10px;
   width: 190px;
 }
 
+.playlist-button button:hover{
+  background-color: #f80c0c;
+}
 .playlist-button button {
-  background-color: rgb(41, 41, 255);
+  background-color: rgb(80, 247, 15);
+  color :#000;
   margin-bottom:15px;
 }
 
@@ -118,4 +168,30 @@ code {
 
 .input-group__error {
   color:rgb(252, 69, 69);
+}
+
+.homepage{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+@media(max-width:670px) {
+  .Album-container {
+    width: 95%;
+  }
+  .music-content {
+    width: 100%;
+  }
+  .music-info {
+    word-wrap: break-word;
+    max-width: 10em;
+  }
+  .playlist {
+    width:80%;
+    min-width: none;
+  }
+  .Album-container-recent {
+    display:block;
+  }
 }

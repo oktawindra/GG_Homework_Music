@@ -1,11 +1,7 @@
 import Button from "../UI/Button";
 import Image from "../UI/Image";
 
-import { useState, useEffect } from 'react';
-
 const Track = ({ albumName,songName,url,artistName,setSelectedList,selectedlist,uri }) => {
-  const [selected, setSelected] = useState(false);
-  const [urlSelected, setUrl] = useState("");
 
   const handleSelect = (data) =>{
     if (selectedlist.includes(data)) {
@@ -27,19 +23,19 @@ const Track = ({ albumName,songName,url,artistName,setSelectedList,selectedlist,
       width="175px"
       height="175px"
       />
-      <h2>{songName}</h2>
-      <h3>{albumName}</h3>
-      <p>{artistName}</p>
-      <div>
-      <div
-      onClick={() => {
-        handleSelect(uri)
-      }}>
-      <Button
-        selectedlist={selectedlist}
-        uri={uri}
-      />
-      </div>
+      <div className="music-info">
+        <h2>{songName}</h2>
+        <h3>{albumName}</h3>
+        <p>{artistName}</p>
+        <div
+        onClick={() => {
+          handleSelect(uri)
+        }}>
+        <Button
+          selectedlist={selectedlist}
+          uri={uri}
+        />
+        </div>
       </div>
     </div>
   );
