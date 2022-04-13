@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { addTracksToPlaylist, createPlaylist } from '../../Data/Profile';
-import Button from '../UI/Button';
 import Input from './input';
 import Merge from './merge';
 import '../../App.css';
