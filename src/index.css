@@ -88,7 +88,7 @@ code {
   clear: left;
 }
 
-.login-content button, .btn-select, .search-form button, .playlist-button button {
+.login-content button, .btn-select, .playlist-button button {
   color: #fff;
   padding: 12px 20px;
   margin: 8px 0px;
@@ -105,24 +105,6 @@ code {
 
 .login-content button:hover {
   background-color: #045a3d;
-}
-
-.search-form input:hover{
-  border: 2px solid chartreuse;
-}
-.search-form input {
-  padding: 10px;
-  margin: 10px 0;
-  border: 2px solid #9c16a3;
-  border-radius: 10px 0px 0px 10px;
-}
-
-.search-form button:hover{
-  background-color: chartreuse;
-}
-.search-form button {
-  border-radius: 0px 10px 10px 0px;
-  background-color: #f11efc;
 }
 
 .search-content h2 {

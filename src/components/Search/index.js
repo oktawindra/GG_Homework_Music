@@ -4,8 +4,10 @@ import { dataAccessToken } from '../../Data/Action.js';
 import Track from "../Track";
 import Login from "../Login";
 import Recent from "../RecentSearch";
-import Play from '../Playlist/play.js'
-import { getUserProfile } from '../../Data/Profile.js'
+import Play from '../Playlist/play.js';
+import { getUserProfile } from '../../Data/Profile.js';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';  
 const axios = require('axios').default;
 
 
@@ -84,8 +86,49 @@ const Search = ({tokencode})=> {
                     uriTracks={selectedlist}
                 />
                     <div className="search-form">
-                        <input type="text" onChange={handleInput} onKeyPress={handleKeyPress}/>
-                        <button onClick={handleSubmit}>Cari</button>
+                    <TextField
+                            id="outlined-basic"
+                            variant="outlined"
+                            size="small"
+                            onChange={handleInput}
+                            onKeyPress={handleKeyPress}
+                            sx={{
+                                'input': {
+                                    color: 'white',
+                                },
+                                '&::placeholder': {
+                                    color: 'blue',
+                                },
+                                '& label.Mui-focused': {
+                                    color: 'green',
+                                },
+                                '& .MuiInput-underline:after': {
+                                    borderBottomColor: 'green',
+                                },
+                                '& .MuiOutlinedInput-root': {
+                                    '& fieldset': {
+                                    borderColor: 'white',
+                                    },
+                                    '&:hover fieldset': {
+                                    borderColor: 'white',
+                                    },
+                                    '&.Mui-focused fieldset': {
+                                    borderColor: 'white',
+                                    },
+                                },
+                            }}
+                        />
+                        <Button
+                            variant="contained"
+                            onClick={handleSubmit}
+                            sx={{
+                                fontWeight: 'bold',
+                                marginLeft: '10px',
+                                height: '40px'
+                            }}
+                        >
+                            Cari
+                        </Button>
                     </div>
                     <h1>Hasil pencarian : {keyword}</h1>
                     <div className="Album-container">
