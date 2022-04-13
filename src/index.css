@@ -21,14 +21,16 @@ code {
 }
 
 .Songs-container {
-  display: block;
-  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 50% 50%; 
 }
 
 .Album-container-recent {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 70%;
+  margin: auto;
 }
 
 .Recent-container {
@@ -41,12 +43,17 @@ code {
 .music-content {
   padding: 10px;
   float:left;
-  width: 47%
 }
 
 .music-content img {
   border-radius: 20px;
   float:left; 
+  display:flex;
+  flex-direction: column;
+}
+
+.music-info > * {
+  margin:10px 0px;
 }
 
 .music-content h2 {
@@ -187,11 +194,15 @@ code {
     word-wrap: break-word;
     max-width: 10em;
   }
+  .Songs-container {
+    grid-template-columns: 100%; 
+  }
   .playlist {
     width:80%;
     min-width: none;
   }
   .Album-container-recent {
-    display:block;
+    flex-wrap: wrap;
+    width: 100%
   }
 }

@@ -30,7 +30,7 @@ const Search = ({tokencode})=> {
                 params: {
                     type: 'track',
                     q: keyword,
-                    limit: 5
+                    limit: 6
                 },
                 headers: {
                     Authorization: `Bearer ${token}`
